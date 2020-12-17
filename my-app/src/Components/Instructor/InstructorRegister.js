@@ -29,6 +29,8 @@ const InstructorRegister = () => {
         setInstructor(newUserData);
     }
 
+    {/* ------------- YUP SCHEMA -------------------- */}
+
     const formSchema = yup.object().shape({
         email: yup
         .string()
@@ -41,6 +43,17 @@ const InstructorRegister = () => {
         .oneOf(["Role 1", "Role 2"])
 
     });
+
+     {/* ------------- USEEFFECT HOOK FOR BUTTON -------------------- */}
+
+     useEffect(() => {
+        formSchema.isValid(instructor).then(valid => {
+            console.log('valid?', valid)
+            setButtonDisabled(!valid);
+        })
+
+     }, [instructor]);
+
 
     return (
         <div>
