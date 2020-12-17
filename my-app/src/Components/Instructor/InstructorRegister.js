@@ -1,11 +1,11 @@
-
 import React, { useState, useEffect } from 'react'
 
 
-const InstructorLogin = () => {
-    const [user, setUser] = useState({
+const InstructorRegister = () => {
+    const [instructor, setInstructor] = useState({
         username: "",
         password: "",
+        email: "",
         role: {
             role1: false,
             role2: false
@@ -14,8 +14,8 @@ const InstructorLogin = () => {
 
     return (
 
-        <div>This is the Login Form</div>
+        <div>This is the Registration Form</div>
     )
 }
 
-export default InstructorLogin
+export default InstructorRegister
