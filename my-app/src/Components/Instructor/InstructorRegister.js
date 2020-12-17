@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as yup from 'yup';
+import axios from 'axios'
 
 
 const InstructorRegister = () => {
@@ -13,19 +14,33 @@ const InstructorRegister = () => {
         role: ""
     })
 
+    // ----------- DUMMY POST STATE -------------
+
+    const [post, setPost] = useState([]);
+
     {/* ------------- BUTTON DISABLED? -------------------- */}
 
     const [buttonDisabled, setButtonDisabled] = useState(true)
 
+      {/* ------------- ERRORS STATE -------------------- */}
+
+      const [errors, setErrors] = useState({
+          email: "",
+          username: "",
+          password: "",
+          role: ""
+      });
+
     {/* ------------- INPUT CHANGE FUNCTION -------------------- */}
 
     const inputChange = e => {
-
+        e.persist();
         const newUserData = {
             ...instructor,
             [e.target.name]: e.target.value
-        }
+        };
 
+        validateChange(e);
         setInstructor(newUserData);
     }
 
@@ -47,24 +62,65 @@ const InstructorRegister = () => {
      {/* ------------- USEEFFECT HOOK FOR BUTTON -------------------- */}
 
      useEffect(() => {
+        console.log('form state change')
         formSchema.isValid(instructor).then(valid => {
             console.log('valid?', valid)
             setButtonDisabled(!valid);
-        })
+        });
 
      }, [instructor]);
 
 
+
+{/* ------------- VALIDATE CHANGE FUNCTION -------------------- */}
+
+const validateChange = (e) => {
+    yup.reach(formSchema, e.target.name).validate(e.target.value)
+    .then(valid => {
+        setErrors({
+            ...errors, 
+            [e.target.name]: ""
+        })
+    })
+    .catch(err => {
+        setErrors({
+            ...errors,
+            [e.target.name]: err.errors[0]
+        })
+    })
+}
+
+{/* ------------- FORM SUBMIT FUNCTION -------------------- */}
+{/* ------------- USING DUMMY POST REQUEST -------------------- */}
+
+const registrationSubmit = e => {
+    e.preventDefault();
+    axios
+    .post("https://reqres.in/api/users", instructor)
+    .then(res => {
+        setPost(res.data);
+        console.log("success!", post);
+        // reset form if succesful
+        setInstructor({
+            email: "",
+            username: "",
+            password: "",
+            role: ""
+        })
+    })
+    .catch(err => console.log(err.response));
+}
+
     return (
         <div>
-        <div>This is the Registration Form</div>
+        <div>Instructor Registration</div>
 
         {/* ------------- INSTRUCTOR FORM -------------------- */}
-        <form onSubmit="">
+        <form onSubmit={registrationSubmit}>
 
         {/* -------------- E-MAIL -------------- */}
 
-             <label htmlFor="email">
+             <label htmlFor="email">e-mail:
                 <input 
                 id="email"
                 type="email"
@@ -73,6 +129,7 @@ const InstructorRegister = () => {
                 value={instructor.email}
                 onChange={inputChange}
                 />
+                {errors.email.length > 0 ? <p style={{color: 'red'}}>{errors.email}</p> : null}
                 </label>
             
             
@@ -87,9 +144,10 @@ const InstructorRegister = () => {
             value={instructor.username}
             onChange={inputChange}
             />
+            {errors.username.length > 0 ? <p style={{color: 'red'}}>{errors.username}</p> : null}
             </label>
 
-             {/* --------------USERNAME -------------- */}
+             {/* -------------- PASSWORD -------------- */}
 
              <label htmlFor="password">password:
                 <input
@@ -100,6 +158,7 @@ const InstructorRegister = () => {
                 value={instructor.password}
                 onChange={inputChange}
                 />
+                {errors.password.length > 0 ? <p style={{color: 'red'}}>{errors.password}</p> : null}
              </label>
 
               {/* -------------- ROLE -------------- */}
@@ -114,11 +173,11 @@ const InstructorRegister = () => {
                     <option>Role 1</option>
                     <option>Role 2</option>
                 </select>
-
+                {errors.role.length > 0 ? <p style={{color: 'red'}}>{errors.role}</p> : null}
               </label>
 
                {/* -------------- SUBMIT BUTTON -------------- */}
-
+               {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
                <button disabled={buttonDisabled}>Ready to register?</button>
 
         </form>
