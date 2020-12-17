@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import * as yup from 'yup';
 
 
 const InstructorRegister = () => {
@@ -9,11 +10,37 @@ const InstructorRegister = () => {
         email: "",
         username: "",
         password: "",
-        role: {
-            role1: false,
-            role2: false
-        }
+        role: ""
     })
+
+    {/* ------------- BUTTON DISABLED? -------------------- */}
+
+    const [buttonDisabled, setButtonDisabled] = useState(true)
+
+    {/* ------------- INPUT CHANGE FUNCTION -------------------- */}
+
+    const inputChange = e => {
+
+        const newUserData = {
+            ...instructor,
+            [e.target.name]: e.target.value
+        }
+
+        setInstructor(newUserData);
+    }
+
+    const formSchema = yup.object().shape({
+        email: yup
+        .string()
+        .email("Must be a valid e-mail address.")
+        .required("Must include email address."),
+        username: yup.string().required("Username is required."),
+        password: yup.string().min(6).max(10).required("Must have a valid password between 5 and 10 characters long."),
+        role: yup
+        .string()
+        .oneOf(["Role 1", "Role 2"])
+
+    });
 
     return (
         <div>
@@ -30,6 +57,8 @@ const InstructorRegister = () => {
                 type="email"
                 name="email"
                 placeholder="E-mail here please."
+                value={instructor.email}
+                onChange={inputChange}
                 />
                 </label>
             
@@ -42,6 +71,8 @@ const InstructorRegister = () => {
             type="text"
             name="username"
             placeholder="Please enter username here."
+            value={instructor.username}
+            onChange={inputChange}
             />
             </label>
 
@@ -53,13 +84,19 @@ const InstructorRegister = () => {
                 type="password"
                 name="password"
                 placeholder="Password here, please."
+                value={instructor.password}
+                onChange={inputChange}
                 />
              </label>
 
               {/* -------------- ROLE -------------- */}
               <label htmlFor="role">
                 Please select your role.
-                <select id="role" name="role">
+                <select 
+                id="role" 
+                name="role"
+                value={instructor.role}
+                onChange={inputChange}>
                     <option>---Please choose an option--</option>
                     <option>Role 1</option>
                     <option>Role 2</option>
@@ -69,7 +106,7 @@ const InstructorRegister = () => {
 
                {/* -------------- SUBMIT BUTTON -------------- */}
 
-               <button type="submit">Ready to register?</button>
+               <button disabled={buttonDisabled}>Ready to register?</button>
 
         </form>
         </div>
