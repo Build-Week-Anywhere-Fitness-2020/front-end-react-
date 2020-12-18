@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
       flexShrink: 0,
     },
   }));
+
   const sections = [
     { title: 'Home', href: '/' },
     { title: 'Instructor Login', href: '/instructor-login' },
@@ -59,7 +60,7 @@ export default function Nav() {
         </Toolbar>
         <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
           {sections.map((section) => (
-            <Link
+            <Button
               color="inherit"
               noWrap
               key={section.title}
@@ -68,7 +69,7 @@ export default function Nav() {
               className={classes.toolbarLink}
             >
               {section.title}
-            </Link>
+            </Button>
           ))}
         </Toolbar>
       </React.Fragment>
