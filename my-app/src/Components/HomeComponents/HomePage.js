@@ -1,5 +1,7 @@
+import { Grid } from "@material-ui/core";
 import React from "react"
-import Nav from "./Nav";
+import HomeCards from "./HomeCards"
+
 
 
 
@@ -8,8 +10,11 @@ import Nav from "./Nav";
 const HomePage = () => {
 return(
 <div>
+<Grid container>
+    <Grid item></Grid>
+</Grid>
+<HomeCards/>
 
-<h1>hi</h1>
 </div>)
 }
 
