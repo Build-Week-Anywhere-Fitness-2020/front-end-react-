@@ -8,38 +8,71 @@ import Link from '@material-ui/core/Link';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
+    toolbar: {
+      borderBottom: `1px solid ${theme.palette.divider}`,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
+    toolbarTitle: {
+      flex: 1,
     },
-    title: {
-      flexGrow: 1,
+    toolbarSecondary: {
+      justifyContent: 'space-between',
+      overflowX: 'auto',
     },
-    appBar: {
-        background: "none"}
+    toolbarLink: {
+      padding: theme.spacing(1),
+      flexShrink: 0,
+    },
   }));
+  const sections = [
+    { title: 'Home', href: '/' },
+    { title: 'Instructor Login', href: '/instructor-login' },
+    { title: 'New Instructor', href:'/instructor-registration'},
+    { title: 'Already A Member', href: 'client-login' },
+    { title: 'Try Us For Free', href: 'client-registration' },
+  ];
 
 export default function Nav() {
     const classes = useStyles();
-
+    
     const handleClick = (e) => {
         e.preventDefault();
         console.log("nav link click")
       }
 
     return(
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar} elevation={1}>
-          <Toolbar>
-          <Typography className={classes.title}/>
-          <Button href="/" onClick={() => handleClick()} color="primary" size="large" color="inherit">Home</Button>
-            <Button href="/instructor-login" onClick={() => handleClick()} size="large" color="inherit">Instructor Login</Button>
-            <Button href="/instructor-registration" onClick={() => handleClick()} size="large" color="inherit">Instructor Registration</Button>
-            <Button href="/client-login" onClick={() => handleClick()} size="large" color="inherit">User Login</Button>
-            <Button href="/client-registration" onClick={() => handleClick()} size="large" color="inherit">User Registration</Button>
-          </Toolbar>
-      </AppBar>
-    </div>)
-}
+        <React.Fragment>
+        <Toolbar className={classes.toolbar}>
+          <Button size="small">Subscribe</Button>
+          <Typography
+            component="h2"
+            variant="h5"
+            color="inherit"
+            align="center"
+            noWrap
+            className={classes.toolbarTitle}
+          >
+              Anywhere Fitness
+          </Typography>
+          <Button variant="outlined" size="small">
+            Sign up
+          </Button>
+        </Toolbar>
+        <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+          {sections.map((section) => (
+            <Link
+              color="inherit"
+              noWrap
+              key={section.title}
+              variant="body2"
+              href={section.href}
+              className={classes.toolbarLink}
+            >
+              {section.title}
+            </Link>
+          ))}
+        </Toolbar>
+      </React.Fragment>
+    );
+  }
+  
+  
