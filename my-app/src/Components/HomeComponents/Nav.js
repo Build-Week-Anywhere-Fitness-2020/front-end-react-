@@ -60,7 +60,7 @@ export default function Nav() {
         </Toolbar>
         <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
           {sections.map((section) => (
-            <Button
+            <Button 
               color="inherit"
               noWrap
               key={section.title}
