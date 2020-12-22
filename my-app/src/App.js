@@ -13,17 +13,20 @@ import {
 import instructorLogin from "./Components/Instructor/InstructorLogin"
 import instructorRegistration from "./Components/Instructor/InstructorRegister"
 import HomePage from "./Components/HomeComponents/HomePage";
+import Nav from "./Components/HomeComponents/Nav";
 
 function App() {
   return (
     <div className="App">
     <Router>
+      <Nav/>
       <Switch>
         <Route exact path="/" component={HomePage}/>
-        <Route exact path="/instructorRegistration" component={instructorRegistration}/>
-        <Route exact path="/instructorLogin" component={instructorLogin}/>
-        <Route exact path="clientRegistration"/>
-        <Route exact path="clientLogin"/>
+        <Route exact path="/instructor-registration" component={instructorRegistration}/>
+        <Route exact path="/instructor-login" component={instructorLogin}/>
+        <Route exact path="client-registration" />
+        <Route exact path="client-login"/>
+    
       </Switch>
     </Router>
     </div>
