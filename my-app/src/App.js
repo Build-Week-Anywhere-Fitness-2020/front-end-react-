@@ -24,7 +24,7 @@ function App() {
         <Route exact path="/" component={HomePage}/>
         <Route exact path="/instructor-registration" component={instructorRegistration}/>
         <Route exact path="/instructor-login" component={instructorLogin}/>
-        <Route exact path="client-registration"/>
+        <Route exact path="client-registration" />
         <Route exact path="client-login"/>
       </Switch>
     </Router>
