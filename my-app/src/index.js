@@ -7,14 +7,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 //component Imports
 //Component Imports
 import instructorLogin from "./Components/Instructor/InstructorLogin"
 import instructorRegistration from "./Components/Instructor/InstructorRegister"
-import HomePage from "./Components/HomeComponents/HomePage";
 import Nav from "./Components/HomeComponents/Nav";
 
 ReactDOM.render(
