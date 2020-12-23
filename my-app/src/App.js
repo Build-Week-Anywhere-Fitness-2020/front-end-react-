@@ -1,33 +1,48 @@
 import React from "react"
 import logo from './logo.svg';
 import './App.css';
-//React Router
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
+import HomeCards from "./Components/HomeComponents/HomeCards"
+import Paper from '@material-ui/core/Paper';
 
-//Component Imports
-import instructorLogin from "./Components/Instructor/InstructorLogin"
-import instructorRegistration from "./Components/Instructor/InstructorRegister"
-import HomePage from "./Components/HomeComponents/HomePage";
-import Nav from "./Components/HomeComponents/Nav";
+
+
+const useStyles = makeStyles(( theme) => ({
+  root: {
+      flexGrow: 1,
+    },
+    main: {
+      minHeight: "60vh",
+      backgroundImage:`url(${process.env.PUBLIC_URL + '/photo-1536922246289-88c42f957773.webp'})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundPosition: "center-top",
+
+    },
+  fitBanner: {
+
+  }
+}));
+
 
 function App() {
+  const classes = useStyles();
+
   return (
     <div className="App">
-    <Router>
-      <Nav/>
-      <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Route exact path="/instructor-registration" component={instructorRegistration}/>
-        <Route exact path="/instructor-login" component={instructorLogin}/>
-        <Route exact path="client-registration" />
-        <Route exact path="client-login"/>
-      </Switch>
-    </Router>
+    <Grid container>
+    <Grid position="relative" className={classes.main} item md={12} />
+    <Grid item xs={12}>
+    <Paper elevation={0}>
+            <Typography variant="h2">
+            Get Fit Today
+            </Typography>
+        </Paper>
+        </Grid>
+    <Grid  item xs={3} className={classes.root} spacing={4}>
+    <HomeCards/>
+    </Grid>
+</Grid>
     </div>
   );
 }
