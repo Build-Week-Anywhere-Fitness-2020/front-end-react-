@@ -1,11 +1,19 @@
 import React from "react"
 import logo from './logo.svg';
 import './App.css';
-import { Grid, makeStyles, Typography } from "@material-ui/core";
-import HomeCards from "./Components/HomeComponents/HomeCards"
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 
+//Component Imports
+import instructorLogin from "./Components/Instructor/InstructorLogin"
+import instructorRegistration from "./Components/Instructor/InstructorRegister"
+import Nav from "./Components/HomeComponents/Nav";
+import Home from "./Components/HomeComponents/Home"
 
 const useStyles = makeStyles(( theme) => ({
   root: {
@@ -30,19 +38,16 @@ function App() {
 
   return (
     <div className="App">
-    <Grid container>
-    <Grid position="relative" className={classes.main} item md={12} />
-    <Grid item xs={12}>
-    <Paper elevation={0}>
-            <Typography variant="h2">
-            Get Fit Today
-            </Typography>
-        </Paper>
-        </Grid>
-    <Grid  item xs={3} className={classes.root} spacing={4}>
-    <HomeCards/>
-    </Grid>
-</Grid>
+     <Router>
+       <Nav/>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/instructor-registration" component={instructorRegistration}/>
+        <Route exact path="/instructor-login" component={instructorLogin}/>
+        <Route exact path="client-registration" />
+        <Route exact path="client-login"/>
+      </Switch>
+    </Router>
     </div>
   );
 }
