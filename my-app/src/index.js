@@ -3,30 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
 
-//component Imports
-//Component Imports
-import instructorLogin from "./Components/Instructor/InstructorLogin"
-import instructorRegistration from "./Components/Instructor/InstructorRegister"
-import Nav from "./Components/HomeComponents/Nav";
 
 ReactDOM.render(
   <React.StrictMode>
-     <Router>
-      <Nav/>
-      <Switch>
-        <Route exact path="/" component={App}/>
-        <Route exact path="/instructor-registration" component={instructorRegistration}/>
-        <Route exact path="/instructor-login" component={instructorLogin}/>
-        <Route exact path="client-registration" />
-        <Route exact path="client-login"/>
-      </Switch>
-    </Router>
+   <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
