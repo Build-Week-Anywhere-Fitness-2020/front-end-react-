@@ -49,7 +49,7 @@ const useStyles = makeStyles({
         title:" Drop In Class ",
         image:`url(${process.env.PUBLIC_URL + 'images/photo-1489844097929-c8d5b91c456e.jpg'})`,
 
-        description:"Here at anywhere fitness we strive to give you the option of dropping into one of our many classes tought by our wonderful instructors everyday even weekends",
+        description:"Here at anywhere fitness we strive to give you the option of dropping into one of our many classes instructed by one of  our wonderful instructors everyday 7 days a week 24 hours a day.",
 
         
     }
@@ -74,7 +74,7 @@ export default function HomeCards() {
           <Typography gutterBottom variant="h5" component="h2">
             {card.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography  color="textSecondary" component="p">
             {card.description}
           </Typography>
         </CardContent>
