@@ -36,10 +36,10 @@ const Home = () => {
             </Typography>
         </Paper>
         </Grid>
-    <Grid  item xs={3} className={classes.root} spacing={4}>
+    <Grid  item xs={3} className={classes.root} >
+    {/** Refactor mapping and style of home cards to one component see material ui album example */}
     <HomeCards/>
     </Grid>
-
     </div>)
 }
 

@@ -1,10 +1,9 @@
 import React from "react"
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -62,9 +61,8 @@ export default function Nav() {
           {sections.map((section) => (
             <Button 
               color="inherit"
-              noWrap
               key={section.title}
-              variant="body2"
+              variant="text"
               href={section.href}
               className={classes.toolbarLink}
             >
