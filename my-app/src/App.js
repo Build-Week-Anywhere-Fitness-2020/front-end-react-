@@ -46,6 +46,7 @@ function App() {
         <Route exact path="/instructor-login" component={instructorLogin}/>
         <Route exact path="client-registration" />
         <Route exact path="client-login"/>
+    
       </Switch>
     </Router>
     </div>
